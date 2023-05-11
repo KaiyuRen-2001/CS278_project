@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
+import Themes from "../assets/Themes";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faHome,
@@ -96,7 +97,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4B0082",
+    backgroundColor: Themes.colors.darkpurple,
   },
   imageContainer: {
     alignItems: "center",
