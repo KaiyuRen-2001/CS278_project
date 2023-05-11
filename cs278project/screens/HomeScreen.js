@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -35,7 +36,7 @@ const ListItem = ({ imageSource, title, location, date, time }) => {
   );
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -78,8 +79,10 @@ const HomeScreen = () => {
           <Text style={styles.iconLabel}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <FontAwesomeIcon icon={faPlus} size={30} color="#888" />
-          <Text style={styles.iconLabel}>Add Event</Text>
+          <Pressable onPress={() => navigation.navigate('AddEvent')}>
+            <FontAwesomeIcon icon={faPlus} size={30} color="#888" />
+            <Text style={styles.iconLabel}>Add Event</Text>
+          </Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
           <FontAwesomeIcon icon={faUser} size={30} color="#888" />
