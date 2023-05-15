@@ -47,6 +47,7 @@ const AddEvent = ({navigation}) => {
 
 
                 {/* Location */}
+                <Pressable onPress={() => navigation.navigate('AddLocation')}>
                 <View style={styles.listItemContainer}>
                     <View style={styles.listItemTextContainer}>
                         <View style={styles.iconNtitle}>
@@ -57,10 +58,10 @@ const AddEvent = ({navigation}) => {
                     <View style={styles.listItemText2Container}>
                         <FontAwesomeIcon icon={faAngleRight} style={styles.icon} />
                     </View>
-                </View>
+                </View></Pressable>
 
                 {/* FRIENDS */}
-                <View style={styles.listItemContainer}>
+                <Pressable onPress={() => navigation.navigate('AddFriends')}><View style={styles.listItemContainer}>
                     <View style={styles.listItemTextContainer}>
                         <View style={styles.iconNtitle}>
                             <FontAwesomeIcon icon={faUserGroup} style={styles.icon} />
@@ -70,7 +71,7 @@ const AddEvent = ({navigation}) => {
                     <View style={styles.listItemText2Container}>
                         <FontAwesomeIcon icon={faAngleRight} style={styles.icon} />
                     </View>
-                </View>
+                </View></Pressable>
                 {/* START TIME */}
                 <View style={styles.listItemContainer}>
                     <View style={styles.listItemTextContainer}>
