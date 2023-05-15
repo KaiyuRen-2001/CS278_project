@@ -6,26 +6,29 @@ import {
     ScrollView,
     TouchableOpacity,
     Pressable,
+
 } from "react-native";
 import Themes from "../assets/Themes";
+import InviteFriends from "./InviteFriends";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
     faMagnifyingGlass,
     faLocationArrow,
     faUserPlus,
-    faXmark
+    faXmark,
+    faShareFromSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 const ListItem = ({ name, phone }) => {
     return (
-        <View style={styles.listItemContainer}>
+        <View style={styles.FriendContainer}>
             <View style={styles.listItemTextContainer}>
-                    <Text style={styles.listItemTitle}>{name}</Text>
-                    <Text style={styles.listItemLocation}>{phone}</Text>
+                <Text style={styles.listItemTitle}>{name}</Text>
+                <Text style={styles.listItemLocation}>{phone}</Text>
             </View>
             <View style={styles.iconNtitle}>
                 <Pressable style={styles.buttonContainer} onPress={() => navigation.navigate(AddEvent)}>
-                    <Text style={styles.heading}>Invite</Text>
+                    <Text style={styles.heading}>Add</Text>
                 </Pressable>
                 <FontAwesomeIcon icon={faXmark} style={styles.icon} />
             </View>
@@ -37,17 +40,32 @@ const AddFriends = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            <View>
-                {/* Title */}
+            <View style={styles.listOuterContainer}>
+                {/* Searc */}
                 <View style={styles.listItemContainer}>
                     <View style={[styles.iconNtitle, styles.bubbleBox]}>
                         <View style={[styles.iconNtitle]}>
-                        <FontAwesomeIcon icon={faUserPlus} style={styles.icon} />
-                        <Text style={styles.listItemTitle}>Search friends</Text>
+                            <FontAwesomeIcon icon={faUserPlus} style={styles.icon} />
+                            <Text style={styles.listItemTitle}>Search friends</Text>
                         </View>
                         <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.icon} />
+
                     </View>
+                    <Text>Hi</Text>
                 </View>
+                {/* share button, remove line, add pressable */}
+                <View style={styles.listItemContainer}>
+                    <View style={[styles.iconNtitle, styles.bubbleBox]}>
+                    <Pressable onPress={() => navigation.navigate(InviteFriends)}><View style={[styles.iconNtitle]}>
+                            <FontAwesomeIcon icon={faUserPlus} style={styles.icon} />
+                            <Text style={styles.listItemTitle}>Invite Friends on Frevent</Text>
+                        </View></Pressable>
+                        <FontAwesomeIcon icon={faShareFromSquare} style={styles.icon} />
+                    </View>
+                    <Text>Hi</Text>
+                </View>
+
+                {/* invite */}
 
                 {/* FRIENDS */}
                 <ListItem
@@ -93,10 +111,27 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         // alignItems: "center",
         justifyContent: "space-between",
-        borderBottomWidth: 1,
-        borderBottomColor: "#fff",
+        // borderBottomWidth: 1,
+        // borderBottomColor: "#fff",
+    },
+    FriendContainer: {
+        flexDirection: "row",
+        // alignItems: "center",
+        justifyContent: "space-between",
+        borderTopWidth: 0.5,
+        borderTopColor: "#fff",
         paddingVertical: 10,
     },
+    listOuterContainer: {
+        // flexDirection: "row",
+        // alignItems: "center",
+        justifyContent: "space-between",
+        // borderBottomWidth: 1,
+        // borderBottomColor: "#fff",
+        paddingVertical: 10,
+    },
+
+
     iconNtitle: {
         flexDirection: "row",
         alignItems: "center",

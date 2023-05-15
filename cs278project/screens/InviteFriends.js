@@ -16,27 +16,24 @@ import {
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 
-const ListItem = ({ name, detail }) => {
+const ListItem = ({ name, phone }) => {
     return (
         <View style={styles.listItemContainer}>
             <View style={styles.listItemTextContainer}>
                     <Text style={styles.listItemTitle}>{name}</Text>
-                    <Text style={styles.listItemLocation}>{detail}</Text>
+                    <Text style={styles.listItemLocation}>{phone}</Text>
             </View>
-            
             <View style={styles.iconNtitle}>
-            {/* <Text style={styles.listItemLocation}>{detail}</Text> */}
-                {/* <Pressable style={styles.buttonContainer} onPress={() => navigation.navigate(AddEvent)}>
+                <Pressable style={styles.buttonContainer} onPress={() => navigation.navigate(AddEvent)}>
                     <Text style={styles.heading}>Invite</Text>
                 </Pressable>
-                
-                <FontAwesomeIcon icon={faXmark} style={styles.icon} /> */}
+                <FontAwesomeIcon icon={faXmark} style={styles.icon} />
             </View>
         </View>
     );
 };
 
-const AddLocation = ({ navigation }) => {
+const InviteFriends = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
@@ -45,39 +42,38 @@ const AddLocation = ({ navigation }) => {
                 <View style={styles.listItemContainer}>
                     <View style={[styles.iconNtitle, styles.bubbleBox]}>
                         <View style={[styles.iconNtitle]}>
-                        <FontAwesomeIcon icon={faLocationArrow} style={styles.icon} />
-                        <Text style={styles.listItemTitle}>Search Location</Text>
+                        <FontAwesomeIcon icon={faUserPlus} style={styles.icon} />
+                        <Text style={styles.listItemTitle}>Search contacts</Text>
                         </View>
                         <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.icon} />
                     </View>
                 </View>
 
-                {/* LOCATIONSS */}
+                {/* FRIENDS */}
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
                 <ListItem
-                    name="Stanford Package Center"
-                    detail="459 Lagunita Drive, Stanford 94305"
+                    name="Casey Nguyen"
+                    phone="650-7822-3903"
                 />
-                
             </View>
         </View>
     );
@@ -99,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         borderBottomWidth: 1,
         borderBottomColor: "#fff",
-        paddingVertical: 15,
+        paddingVertical: 10,
     },
     iconNtitle: {
         flexDirection: "row",
@@ -154,4 +150,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AddLocation;
+export default InviteFriends;
