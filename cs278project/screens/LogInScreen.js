@@ -10,11 +10,22 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { auth } from '../firebase'
+import {signInWithEmailAndPassword} from 'firebase/auth';
 import Themes from "../assets/Themes";
 
 const LogInScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handlePress = () => {
-    navigation.navigate("HomeScreen");
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        //console.log("Registered with:", user.email);
+        navigation.navigate('HomeScreen');
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -31,6 +42,8 @@ const LogInScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="user@email.com"
+            onChangeText={(text) => setEmail(text)}
+            value={email}
             placeholderTextColor="gray"
           />
         </View>
@@ -41,12 +54,14 @@ const LogInScreen = ({ navigation }) => {
             style={styles.input}
             placeholder="Password"
             placeholderTextColor="gray"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
             keyboardType="phone-pad"
           />
         </View>
       </View>
       <View style={styles.signupButtonContainer}>
-        <Button title="Sign up ->" onPress={handlePress} color="#FFFFFF" />
+        <Button title="Log In ->" onPress={handlePress} color="#FFFFFF" />
       </View>
     </SafeAreaView>
   );

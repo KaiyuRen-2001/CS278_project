@@ -7,23 +7,54 @@ import {
   Button,
   Image,
   View,
+  Alert,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 import Themes from "../assets/Themes";
 
 const CreateAccountScreen = ({ navigation }) => {
+  /*
   const handlePress = () => {
     navigation.navigate("LogInScreen");
   };
+  */
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+  /*
+  const handlePress = async () => {
+    try {
+      await auth().createUserWithEmailAndPassword(email, password);
+      navigation.navigate("LogInScreen");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+*/
+  
+
+  const handlePress = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        //console.log("Registered with:", user.email);
+        navigation.navigate("LogInScreen");
+      })
+      .catch((error) => alert(error.message));
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logo.png")} style={styles.image} />
       </View>
       <Text style={styles.appName}>Create Account</Text>
-      <Text style={styles.appDescription}>Please create an account to continue:</Text>
+      <Text style={styles.appDescription}>
+        Please create an account to continue:
+      </Text>
       <View style={styles.buttonsContainer}>
         <Text style={styles.appDescription}>Email: </Text>
         <View style={styles.roundedButton}>
@@ -31,6 +62,8 @@ const CreateAccountScreen = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="user@email.com"
+            onChangeText={(text) => setEmail(text)}
+            value={email}
             placeholderTextColor="gray"
           />
         </View>
@@ -41,6 +74,8 @@ const CreateAccountScreen = ({ navigation }) => {
             style={styles.input}
             placeholder="Password"
             placeholderTextColor="gray"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
             keyboardType="phone-pad"
           />
         </View>
