@@ -11,10 +11,11 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+//import { auth } from "../firebase";
+//import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { supabase } from '../supabase'
 import Themes from "../assets/Themes";
+
 
 const CreateAccountScreen = ({ navigation }) => {
   /*
@@ -36,7 +37,7 @@ const CreateAccountScreen = ({ navigation }) => {
   };
 */
   
-
+/*
   const handlePress = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
@@ -46,6 +47,21 @@ const CreateAccountScreen = ({ navigation }) => {
       })
       .catch((error) => alert(error.message));
   };
+  */
+
+  const handlePress = () => {
+    supabase.auth.signUp({ email, password })
+      .then((response) => {
+        if (response.error) {
+          Alert.alert("Error", response.error.message);
+        } else {
+          const user = response.user;
+          navigation.navigate("LogInScreen");
+        }
+      })
+      .catch((error) => Alert.alert("Error", error.message));
+  };
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>

@@ -10,6 +10,7 @@ import AddEvent from "./screens/AddEvent";
 import AddFriends from "./screens/AddFriends";
 import AddLocation from "./screens/AddLocation";
 import InviteFriends from "./screens/InviteFriends";
+import { supabase } from './supabase';
 import "react-native-gesture-handler";
 
 const Stack = createStackNavigator();
