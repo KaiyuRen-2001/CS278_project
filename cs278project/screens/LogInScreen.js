@@ -30,6 +30,7 @@ const LogInScreen = ({ navigation }) => {
       .catch((error) => alert(error.message));
   };
   */
+  /*
   const handlePress = () => {
     supabase.auth
       .signIn({ email, password })
@@ -43,7 +44,10 @@ const LogInScreen = ({ navigation }) => {
       })
       .catch((error) => Alert.alert("Error", error.message));
   };
-
+*/
+  const handlePress = () => {
+    navigation.navigate("HomeScreen");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>

@@ -18,11 +18,11 @@ import Themes from "../assets/Themes";
 
 
 const CreateAccountScreen = ({ navigation }) => {
-  /*
+  
   const handlePress = () => {
     navigation.navigate("LogInScreen");
   };
-  */
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,7 +48,7 @@ const CreateAccountScreen = ({ navigation }) => {
       .catch((error) => alert(error.message));
   };
   */
-
+/*
   const handlePress = () => {
     supabase.auth.signUp({ email, password })
       .then((response) => {
@@ -61,7 +61,7 @@ const CreateAccountScreen = ({ navigation }) => {
       })
       .catch((error) => Alert.alert("Error", error.message));
   };
-  
+  */
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
