@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-//import { auth } from '../firebase'
-//import {signInWithEmailAndPassword} from 'firebase/auth';
+import { auth } from '../firebase'
+import {signInWithEmailAndPassword} from 'firebase/auth';
 import { supabase } from "../env/supabase";
 
 import Themes from "../assets/Themes";
@@ -19,7 +19,7 @@ import Themes from "../assets/Themes";
 const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /*
+  
   const handlePress = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
@@ -29,7 +29,7 @@ const LogInScreen = ({ navigation }) => {
       })
       .catch((error) => alert(error.message));
   };
-  */
+  
   /*
   const handlePress = () => {
     supabase.auth
@@ -45,9 +45,11 @@ const LogInScreen = ({ navigation }) => {
       .catch((error) => Alert.alert("Error", error.message));
   };
 */
+/*
   const handlePress = () => {
     navigation.navigate("HomeScreen");
   };
+  */
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>

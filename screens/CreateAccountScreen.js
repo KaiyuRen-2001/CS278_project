@@ -11,22 +11,22 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-//import { auth } from "../firebase";
-//import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { supabase } from '../env/supabase'
 import Themes from "../assets/Themes";
 
 
 const CreateAccountScreen = ({ navigation }) => {
-  
+  /*
   const handlePress = () => {
     navigation.navigate("LogInScreen");
   };
-  
+  */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  /*
+  
   const handlePress = async () => {
     try {
       await auth().createUserWithEmailAndPassword(email, password);
@@ -35,7 +35,7 @@ const CreateAccountScreen = ({ navigation }) => {
       Alert.alert("Error", error.message);
     }
   };
-*/
+
   
 /*
   const handlePress = () => {
