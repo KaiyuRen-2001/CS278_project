@@ -80,14 +80,16 @@ const HomeScreen = ({ navigation }) => {
           <Text style={styles.iconLabel}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <Pressable onPress={() => navigation.navigate('AddEvent')}>
+          <Pressable onPress={() => navigation.navigate("AddEvent")}>
             <FontAwesomeIcon icon={faPlus} size={30} color="#888" />
             <Text style={styles.iconLabel}>Add Event</Text>
           </Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <FontAwesomeIcon icon={faUser} size={30} color="#888" />
-          <Text style={styles.iconLabel}>Profile</Text>
+          <Pressable onPress={() => navigation.navigate("UserProfile")}>
+            <FontAwesomeIcon icon={faUser} size={30} color="#888" />
+            <Text style={styles.iconLabel}>Profile</Text>
+          </Pressable>
         </TouchableOpacity>
       </View>
     </View>
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlign: "left",
   },
-  
+
   profileImage: {
     width: 30,
     height: 30,

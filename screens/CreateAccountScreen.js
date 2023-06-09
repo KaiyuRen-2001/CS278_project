@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { supabase } from '../env/supabase'
+// import { supabase } from '../env/supabase'
 import Themes from "../assets/Themes";
 
 
