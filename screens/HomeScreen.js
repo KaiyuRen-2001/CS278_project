@@ -31,7 +31,7 @@ const ListItem = ({ imageSource, title, description, hours,friends, location, da
       <View style={styles.listItemText2Container}>
         <Text style={styles.listItemDate}>{date}</Text>
         <Text style={styles.listItemTime}>{hours} hours</Text>
-        <Text style={styles.listItemTime}>{friends.join(", ")} are going</Text>
+        {/* <Text style={styles.listItemTime}>{friends.join(", ")} are going</Text> */}
       </View>
       {/* <TouchableOpacity style={styles.listItemEditButton}>
         <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
