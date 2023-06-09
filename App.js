@@ -14,6 +14,7 @@ import { supabase } from './env/supabase';
 import "react-native-gesture-handler";
 import ThankYouScreen from "./screens/ThankYouScreen";
 import UserProfile from "./screens/UserProfile";
+import EventRSVP from "./screens/EventRSVP"
 
 
 const Stack = createStackNavigator();
@@ -32,6 +33,7 @@ export default function App() {
         <Stack.Screen name="AddLocation" component={AddLocation} />
         <Stack.Screen name="InviteFriends" component={InviteFriends} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name ="EventRSVP" component={EventRSVP} />
       </Stack.Navigator>
     </NavigationContainer>
   );

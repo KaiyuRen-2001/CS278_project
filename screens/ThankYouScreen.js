@@ -24,6 +24,7 @@ const ThankYouScreen = ({ navigation, route }) => {
         Description: event.description,
         Location: event.location,
         CreatedBy: auth.currentUser.uid,
+        RSVPedBy: event.rsvp,
       };
       if (event.title == "Write a title..."){
         event.title = "null";

@@ -27,7 +27,7 @@ const EventRSVP = ({ navigation, route }) => {
   // Define a function to handle the RSVP action
   const handleRSVP = async () => {
     const database = getDatabase(); // Get a reference to the Firebase database
-    const rsvpRef = ref(database, `Events/${eventId}/rsvp/${auth.currentUser.uid}`); // Define a reference to this user's RSVP for this event
+    const rsvpRef = ref(database, `Events/${event.Title}/RSVPedBy/${auth.currentUser.uid}`); // Define a reference to this user's RSVP for this event
 
     // Set the RSVP value to true in the database
     await set(rsvpRef, true);

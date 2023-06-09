@@ -17,8 +17,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "react-native-elements";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { auth, set } from "../firebase";
 
-const ListItem = ({ imageSource, title, description, hours,friends, location, date }) => {
+const handleRSVP = async (title) => {
+  const database = getDatabase(); // Get a reference to the Firebase database
+  await set(ref(database, `Events/${title}/RSVPedBy`), auth.currentUser.uid);
+  navigation.goBack();
+};
+
+const ListItem = ({ imageSource, title, description, hours, friends, location, date }) => {
   return (
     <View style={styles.listItemContainer}>
       <Image source={imageSource} style={styles.profileImage} />
@@ -33,9 +40,11 @@ const ListItem = ({ imageSource, title, description, hours,friends, location, da
         <Text style={styles.listItemTime}>{hours} hours</Text>
         {/* <Text style={styles.listItemTime}>{friends.join(", ")} are going</Text> */}
       </View>
-      {/* <TouchableOpacity style={styles.listItemEditButton}>
-        <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
-      </TouchableOpacity> */}
+      <TouchableOpacity style={styles.listItemEditButton}>
+        <Pressable onPress={() => handleRSVP(title)}>
+          <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
+        </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

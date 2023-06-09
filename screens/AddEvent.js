@@ -37,6 +37,7 @@ const AddEvent = ({ navigation }) => {
         friends: [],
         startTime: 'Today, 10:00 PM',
         hours: 0,
+        rsvp: '',
     });
 
     const handleHoursChange = (hours) => {
