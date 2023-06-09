@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import Themes from "../assets/Themes";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { supabase } from '../env/supabase';
+import { getDatabase, ref, set } from "firebase/database";
+import { auth } from "../firebase";
+
 
 const ThankYouScreen = ({ navigation, route }) => {
     console.log(route.params);
@@ -10,45 +11,31 @@ const ThankYouScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     insertTask();
-    updateTask();
   }, []);
 
   async function insertTask() {
     try {
-      const { data, error } = await supabase
-        .from("Events")
-        .insert({ Title: event.title });
-      if (error) {
-        console.error("Error inserting event:", error);
-      } else {
-        console.log("Event inserted successfully:", data);
+      const database = getDatabase();
+      const newEvent = {
+        // Title: event.title,
+        Friends: event.friends,
+        Date: event.startTime,
+        Hours: event.hours,
+        Description: event.description,
+        Location: event.location,
+        CreatedBy: auth.currentUser.uid,
+      };
+      if (event.title == "Write a title..."){
+        event.title = "null";
       }
+      await set(ref(database, `Events/${event.title}`), newEvent);
+      console.log("Event added successfully");
     } catch (error) {
-      console.error("Error inserting event:", error);
+      console.error("Error adding event:", error);
     }
   }
   
-  async function updateTask() {
-    try {
-      const { data, error } = await supabase
-        .from("Tasks")
-        .update({
-          Friends: event.friends,
-          Date: event.startTime,
-          Hours: event.hours,
-          Description: event.description,
-          Location: event.location,
-        })
-        .eq("Title", event.title);
-      if (error) {
-        console.error("Error updating task:", error);
-      } else {
-        console.log("Task updated successfully:", data);
-      }
-    } catch (error) {
-      console.error("Error updating task:", error);
-    }
-  }
+  
   
 
   return (
