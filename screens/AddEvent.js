@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     StyleSheet,
     View,
@@ -35,7 +35,7 @@ const AddEvent = ({ navigation }) => {
         description: 'Write a description...',
         location: '',
         friends: [],
-        startTime: '',
+        startTime: 'Today, 10:00 PM',
         hours: 0,
     });
 
@@ -92,12 +92,14 @@ const AddEvent = ({ navigation }) => {
 
             <View>
                 {/* Title */}
+                {/* Title */}
                 <View style={styles.listItemContainer}>
                     <View style={[styles.iconNtitle, styles.bubbleBox]}>
                         <FontAwesomeIcon icon={faPen} style={styles.icon} />
                         <TextInput
                             style={styles.listItemTitle}
                             placeholder="Write a title..."
+                            placeholderTextColor="#888"
                             onChangeText={handleTitleChange}
                         />
                     </View>
@@ -110,41 +112,26 @@ const AddEvent = ({ navigation }) => {
                         <TextInput
                             style={styles.listItemTitle}
                             placeholder="Write a description..."
+                            placeholderTextColor="#888"
                             onChangeText={handleDescriptionChange}
                         />
                     </View>
                 </View>
 
 
-                {/* Location */}
-                <Pressable onPress={() => navigation.navigate('AddLocation', { handleLocationChange })}>
-                    <View style={styles.listItemContainer}>
-                        <View style={styles.listItemTextContainer}>
-                            <View style={styles.iconNtitle}>
-                                <FontAwesomeIcon icon={faLocationDot} style={styles.icon} />
-                                <Text style={styles.listItemTitle}>Add location</Text>
-                            </View>
-                        </View>
-                        <View style={styles.listItemText2Container}>
-                            <FontAwesomeIcon icon={faAngleRight} style={styles.icon} />
-                        </View>
-                    </View>
-                </Pressable>
 
-                {/* FRIENDS */}
-                <Pressable onPress={() => navigation.navigate('AddFriends', { handleFriendChange })}>
-                    <View style={styles.listItemContainer}>
-                        <View style={styles.listItemTextContainer}>
-                            <View style={styles.iconNtitle}>
-                                <FontAwesomeIcon icon={faUserGroup} style={styles.icon} />
-                                <Text style={styles.listItemTitle}>Add friends</Text>
-                            </View>
-                        </View>
-                        <View style={styles.listItemText2Container}>
-                            <FontAwesomeIcon icon={faAngleRight} style={styles.icon} />
-                        </View>
+                {/* Location */}
+                <View style={styles.listItemContainer}>
+                    <View style={[styles.iconNtitle, styles.bubbleBox]}>
+                        <FontAwesomeIcon icon={faLocationDot} style={styles.icon} />
+                        <TextInput
+                            style={styles.listItemTitle}
+                            placeholder="Where will you be meeting?"
+                            placeholderTextColor="#888"
+                            onChangeText={handleLocationChange}
+                        />
                     </View>
-                </Pressable>
+                </View>
 
                 {/* START TIME */}
                 <Pressable onPress={() => handleStartTimeChange}>
@@ -187,11 +174,11 @@ const AddEvent = ({ navigation }) => {
 
             {/* SUBMIT BUTTON */}
             <Pressable
-  style={styles.buttonContainer}
-  onPress={() => navigation.navigate('ThankYouScreen', { event: event })}
->
-  <Text style={styles.heading}>Create Event</Text>
-</Pressable>
+                style={styles.buttonContainer}
+                onPress={() => navigation.navigate('ThankYouScreen', { event: event })}
+            >
+                <Text style={styles.heading}>Create Event</Text>
+            </Pressable>
         </View>
     );
 };
@@ -268,4 +255,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AddEvent;
+export default AddEvent; ``

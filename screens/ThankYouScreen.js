@@ -17,7 +17,7 @@ const ThankYouScreen = ({ navigation, route }) => {
     try {
       const database = getDatabase();
       const newEvent = {
-        // Title: event.title,
+        Title: event.title,
         Friends: event.friends,
         Date: event.startTime,
         Hours: event.hours,

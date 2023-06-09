@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -16,28 +16,57 @@ import {
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "react-native-elements";
+import { getDatabase, ref, onValue } from "firebase/database";
 
-const ListItem = ({ imageSource, title, location, date, time }) => {
+const ListItem = ({ imageSource, title, description, hours,friends, location, date }) => {
   return (
     <View style={styles.listItemContainer}>
       <Image source={imageSource} style={styles.profileImage} />
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{title}</Text>
+        <Text style={styles.listItemLocation}>{description}</Text>
         <Text style={styles.listItemLocation}>{location}</Text>
       </View>
 
       <View style={styles.listItemText2Container}>
         <Text style={styles.listItemDate}>{date}</Text>
-        <Text style={styles.listItemTime}>{time}</Text>
+        <Text style={styles.listItemTime}>{hours} hours</Text>
+        <Text style={styles.listItemTime}>{friends.join(", ")} are going</Text>
       </View>
-      <TouchableOpacity style={styles.listItemEditButton}>
+      {/* <TouchableOpacity style={styles.listItemEditButton}>
         <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
 
 const HomeScreen = ({ navigation }) => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  async function fetchEvents() {
+    try {
+      const database = getDatabase();
+      const eventsRef = ref(database, "Events");
+
+      onValue(eventsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const eventsArray = Object.values(data);
+          setEvents(eventsArray);
+        }
+      });
+
+      console.log("Events list:", events);
+      console.log("Events fetched successfully");
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -45,34 +74,19 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <Text style={styles.heading}>Friends and Events</Text>
       <ScrollView style={styles.scrollView}>
-        <ListItem
-          imageSource={require("../assets/stanford.png")}
-          title="Wilbur Dinner!"
-          location="Wilbur Dining"
-          date="May 1, 2023"
-          time="6:30pm"
-        />
-        <ListItem
-          imageSource={require("../assets/stanford.png")}
-          title="Cinco de Mayo Stern Dining"
-          location="Stern Dining"
-          date="May 5, 2023"
-          time="11:30am"
-        />
-        <ListItem
-          imageSource={require("../assets/stanford.png")}
-          title="Cinco de Mayo Party"
-          location="Mirrielees Dorm"
-          date="May 1, 2023"
-          time="10:30am"
-        />
-        <ListItem
-          imageSource={require("../assets/stanford.png")}
-          title="SVSA Field Day"
-          location="Wilbur Field"
-          date="May 6, 2023"
-          time="2:30pm"
-        />
+        {events.map((event, index) => (
+          <ListItem
+            key={index}
+            imageSource={require("../assets/stanford.png")}
+            title={event.Title}
+            description={event.Description}
+            location={event.Location}
+            date={event.Date}
+            time={event.Time}
+            hours={event.Hours}
+            friends = {event.Friends}
+          />
+        ))}
       </ScrollView>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.iconButton}>
@@ -86,15 +100,112 @@ const HomeScreen = ({ navigation }) => {
           </Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <Pressable onPress={() => navigation.navigate("UserProfile")}>
-            <FontAwesomeIcon icon={faUser} size={30} color="#888" />
-            <Text style={styles.iconLabel}>Profile</Text>
-          </Pressable>
+          <FontAwesomeIcon icon={faUser} size={30} color="#888" />
+          <Text style={styles.iconLabel}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+
+// import React from "react";
+// import {
+//   StyleSheet,
+//   View,
+//   Text,
+//   ScrollView,
+//   TouchableOpacity,
+//   Pressable,
+// } from "react-native";
+// import Themes from "../assets/Themes";
+// import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+// import {
+//   faHome,
+//   faUser,
+//   faPlus,
+//   faEllipsis,
+// } from "@fortawesome/free-solid-svg-icons";
+// import { Image } from "react-native-elements";
+
+// const ListItem = ({ imageSource, title, location, date, time }) => {
+//   return (
+//     <View style={styles.listItemContainer}>
+//       <Image source={imageSource} style={styles.profileImage} />
+//       <View style={styles.listItemTextContainer}>
+//         <Text style={styles.listItemTitle}>{title}</Text>
+//         <Text style={styles.listItemLocation}>{location}</Text>
+//       </View>
+
+//       <View style={styles.listItemText2Container}>
+//         <Text style={styles.listItemDate}>{date}</Text>
+//         <Text style={styles.listItemTime}>{time}</Text>
+//       </View>
+//       <TouchableOpacity style={styles.listItemEditButton}>
+//         <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// const HomeScreen = ({ navigation }) => {
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.imageContainer}>
+//         <Image source={require("../assets/map.jpeg")} style={styles.image} />
+//       </View>
+//       <Text style={styles.heading}>Friends and Events</Text>
+//       <ScrollView style={styles.scrollView}>
+//         <ListItem
+//           imageSource={require("../assets/stanford.png")}
+//           title="Wilbur Dinner!"
+//           location="Wilbur Dining"
+//           date="May 1, 2023"
+//           time="6:30pm"
+//         />
+//         <ListItem
+//           imageSource={require("../assets/stanford.png")}
+//           title="Cinco de Mayo Stern Dining"
+//           location="Stern Dining"
+//           date="May 5, 2023"
+//           time="11:30am"
+//         />
+//         <ListItem
+//           imageSource={require("../assets/stanford.png")}
+//           title="Cinco de Mayo Party"
+//           location="Mirrielees Dorm"
+//           date="May 1, 2023"
+//           time="10:30am"
+//         />
+//         <ListItem
+//           imageSource={require("../assets/stanford.png")}
+//           title="SVSA Field Day"
+//           location="Wilbur Field"
+//           date="May 6, 2023"
+//           time="2:30pm"
+//         />
+//       </ScrollView>
+//       <View style={styles.footer}>
+//         <TouchableOpacity style={styles.iconButton}>
+//           <FontAwesomeIcon icon={faHome} size={30} color="#888" />
+//           <Text style={styles.iconLabel}>Home</Text>
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.iconButton}>
+//           <Pressable onPress={() => navigation.navigate("AddEvent")}>
+//             <FontAwesomeIcon icon={faPlus} size={30} color="#888" />
+//             <Text style={styles.iconLabel}>Add Event</Text>
+//           </Pressable>
+//         </TouchableOpacity>
+//         <TouchableOpacity style={styles.iconButton}>
+//           <Pressable onPress={() => navigation.navigate("UserProfile")}>
+//             <FontAwesomeIcon icon={faUser} size={30} color="#888" />
+//             <Text style={styles.iconLabel}>Profile</Text>
+//           </Pressable>
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -186,3 +297,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+
