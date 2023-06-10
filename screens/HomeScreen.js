@@ -19,16 +19,21 @@ import { Image } from "react-native-elements";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { auth, set } from "../firebase";
 
+<<<<<<< HEAD
 const handleRSVP = async (title) => {
   const database = getDatabase(); // Get a reference to the Firebase database
   await set(ref(database, `Events/${title}/RSVPedBy`), auth.currentUser.uid);
   navigation.goBack();
 };
 
+=======
+>>>>>>> f91a0da0d91fafa9974244009fbf6b74785de7ca
 const ListItem = ({ imageSource, title, description, hours, friends, location, date }) => {
   return (
     <View style={styles.listItemContainer}>
-      <Image source={imageSource} style={styles.profileImage} />
+      {/* <View style={styles.imageContainer}>
+        <Image source={imageSource} style={styles.profileImage} />
+      </View> */}
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{title}</Text>
         <Text style={styles.listItemLocation}>{description}</Text>
@@ -243,7 +248,6 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: "bold",
-    //flex: 1,
     fontSize: 20,
     color: "#fff",
     marginLeft: 10,
@@ -252,7 +256,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlign: "left",
   },
-
   profileImage: {
     width: 30,
     height: 30,
@@ -261,7 +264,6 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     fontWeight: "bold",
-    //flex: 1,
     color: "#fff",
     marginRight: 10,
   },
@@ -276,13 +278,9 @@ const styles = StyleSheet.create({
     color: "#F5DEB3",
   },
   listItemDate: {
-    color: "#fff",
-    marginRight: 10,
     color: "#F5DEB3",
   },
   listItemTime: {
-    color: "#fff",
-    marginRight: 10,
     color: "#F5DEB3",
   },
   listItemDots: {
@@ -304,6 +302,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
 
 export default HomeScreen;
 

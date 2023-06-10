@@ -12,6 +12,8 @@ import Themes from "../assets/Themes";
 import { Dimensions } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import DatePicker from "react-native-datepicker";
+
 import {
     faHome,
     faLocationDot,
@@ -135,7 +137,7 @@ const AddEvent = ({ navigation }) => {
                 </View>
 
                 {/* START TIME */}
-                <Pressable onPress={() => handleStartTimeChange}>
+                {/* <Pressable onPress={() => handleStartTimeChange}>
                     <View style={styles.listItemContainer}>
                         <View style={styles.listItemTextContainer}>
                             <View style={styles.iconNtitle}>
@@ -143,11 +145,21 @@ const AddEvent = ({ navigation }) => {
                                 <Text style={styles.listItemTitle}>Start Time</Text>
                             </View>
                         </View>
-                        <View style={styles.listItemText2Container}>
-                            <Text style={styles.listItemDate}>Today, 10:00 PM</Text>
-                        </View>
+                    
                     </View>
-                </Pressable>
+                </Pressable> */}
+                <View style={styles.listItemContainer}>
+                    <View style={[styles.iconNtitle, styles.bubbleBox]}>
+                        <FontAwesomeIcon icon={faClock} style={styles.icon} />
+                        <TextInput
+                            style={styles.listItemTitle}
+                            placeholder="Start Time"
+                            placeholderTextColor="#888"
+                            value={event.startTime}
+                            onChangeText={handleStartTimeChange}
+                        />
+                    </View>
+                </View>
 
                 {/* END TIME */}
                 <Pressable onPress={() => navigation.navigate('AddEndTime', { handleEndTimeChange })}>
