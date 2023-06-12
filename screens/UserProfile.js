@@ -34,20 +34,23 @@ const UserProfile = ({ navigation }) => {
 
       <View>
         <Text style={styles.subheading}>Events You Created:</Text>
-        {createdEvents.map((eventId) => (
+        {console.log("These are the created events", createdEvents)}
+        
+        {/* createdEvents.map((eventId) => (
           <Text key={eventId} style={styles.eventId}>
             {eventId}
           </Text>
-        ))}
+        )) */ }
       </View>
 
       <View>
         <Text style={styles.subheading}>Events You RSVPed To:</Text>
-        {rsvpedEvents.map((eventId) => (
+        {console.log("These are the rsvped events", rsvpedEvents)}
+        {/* rsvpedEvents.map((eventId) => (
           <Text key={eventId} style={styles.eventId}>
             {eventId}
           </Text>
-        ))}
+        )) */ }
       </View>
 
       {/* HOME BUTTON */}

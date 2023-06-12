@@ -18,22 +18,23 @@ import {
 import { Image } from "react-native-elements";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { auth, set } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
 
-<<<<<<< HEAD
-const handleRSVP = async (title) => {
-  const database = getDatabase(); // Get a reference to the Firebase database
-  await set(ref(database, `Events/${title}/RSVPedBy`), auth.currentUser.uid);
-  navigation.goBack();
-};
-
-=======
->>>>>>> f91a0da0d91fafa9974244009fbf6b74785de7ca
-const ListItem = ({ imageSource, title, description, hours, friends, location, date }) => {
+const ListItem = ({
+  imageSource,
+  title,
+  description,
+  hours,
+  friends,
+  location,
+  date,
+}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.listItemContainer}>
-      {/* <View style={styles.imageContainer}>
+      {/*<View style={styles.imageContainer}>
         <Image source={imageSource} style={styles.profileImage} />
-      </View> */}
+  </View> */}
       <View style={styles.listItemTextContainer}>
         <Text style={styles.listItemTitle}>{title}</Text>
         <Text style={styles.listItemLocation}>{description}</Text>
@@ -46,8 +47,11 @@ const ListItem = ({ imageSource, title, description, hours, friends, location, d
         {/* <Text style={styles.listItemTime}>{friends.join(", ")} are going</Text> */}
       </View>
       <TouchableOpacity style={styles.listItemEditButton}>
-        <Pressable onPress={() => handleRSVP(title)}>
-          <FontAwesomeIcon icon={faEllipsis} size={20} color="#888" />
+        <Pressable
+          onPress={() => navigation.navigate("EventRSVP")}
+          style={styles.rsvpButton}
+        >
+          <Text style={styles.rsvpButtonText}>RSVP</Text>
         </Pressable>
       </TouchableOpacity>
     </View>
@@ -98,7 +102,7 @@ const HomeScreen = ({ navigation }) => {
             date={event.Date}
             time={event.Time}
             hours={event.Hours}
-            friends = {event.Friends}
+            friends={event.Friends}
           />
         ))}
       </ScrollView>
@@ -114,14 +118,15 @@ const HomeScreen = ({ navigation }) => {
           </Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <FontAwesomeIcon icon={faUser} size={30} color="#888" />
-          <Text style={styles.iconLabel}>Profile</Text>
+          <Pressable onPress={() => navigation.navigate("UserProfile")}>
+            <FontAwesomeIcon icon={faUser} size={30} color="#888" />
+            <Text style={styles.iconLabel}>Profile</Text>
+          </Pressable>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
 
 // import React from "react";
 // import {
@@ -301,8 +306,19 @@ const styles = StyleSheet.create({
     color: "#888",
     marginTop: 5,
   },
+  rsvpButton: {
+    backgroundColor: "#888",
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  rsvpButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+  },
 });
 
-
 export default HomeScreen;
-
